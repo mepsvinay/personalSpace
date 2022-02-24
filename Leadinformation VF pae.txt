@@ -1,0 +1,477 @@
+<apex:page standardController="Lead" extensions="LeadInformationController">
+
+      <style>
+          .headerRow th {background-color: #996 !important; color: #fff !important;  padding: 5px !important;}
+          body .apexp .pbBody table.list { border: 1px solid #e0e3e5;}   
+          .headerRow th {background-color: #996 !important; color: #fff !important;  padding: 5px !important;}
+          body .apexp .pbBody table.list { border: 1px solid #e0e3e5;}   mily:system-ui !important; font-size:12px ; color:#000;}
+          .bPageBlock, .brandSecondaryBrd, .apexDefaultPageBlock, .secondaryPalette{background:#fff!important; border:none !important;}
+          .maintbl{background-color:#fff; border:solid 1px #ddd; border-collapse: collapse;}
+          .maintbl a{display: contents; cursor: help;}
+          .maintbl tr th{color:#fff;}
+          .maintbl tr th, .maintbl tr td{text-align:center; vertical-align:middle}
+          .maintbl tr:first-child{border-bottom:solid 1px #ddd; background-color:#996;}
+          .maintbl tr td{border-right:solid 1px #ddd; line-height:20px; }
+          .maintbl tr td:last-child{border:none !important}
+          .va{vertical-align:middle}
+          .prequal, .bank, .dd, .mfd, .audit, .mgmt, .draft, .sigdir,  .Adddir,.cais, .forcast, .qc {height: auto; padding:5px 10px; font-weight:bold; overflow: hidden; z-index: 10000; display: none; margin:5px 0;}
+          #menu:hover + .prequal, #menu:hover + .bank , #menu:hover + .dd, #menu:hover + .mfd, #menu:hover + .audit, #menu:hover + .mgmt,
+          #menu:hover + .draft, #menu:hover + .sigdir,  #menu:hover + .Adddir, #menu:hover + .cais, #menu:hover + .forcast,  #menu:hover + .qc {display: inline-block; width:auto;}
+    </style>
+
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js">
+
+    </script>
+
+   
+
+    <script>
+
+    $( document ).ready(function() {
+
+        $('#prequal').hover(function() {
+
+            $('.prequal').toggle();
+
+        });
+
+       
+
+        $('#bank').hover(function() {
+
+            $('.bank').toggle();
+
+        });
+
+       
+
+        $('#dd').hover(function() {
+
+            $('.dd').toggle();
+
+        });
+
+       
+
+        $('#mfd').hover(function() {
+
+            $('.mfd').toggle();
+
+        });
+
+       
+
+        $('#audit').hover(function() {
+
+            $('.audit').toggle();
+
+        });
+
+       
+
+        $('#mgmt').hover(function() {
+
+            $('.mgmt').toggle();
+
+        });
+
+       
+
+        $('#draft').hover(function() {
+
+            $('.draft').toggle();
+
+        });
+        
+         $('#forcast').hover(function() {
+
+            $('.forcast').toggle();
+
+        });
+
+       
+
+        $('#sigdir').hover(function() {
+
+            $('.sigdir').toggle();
+
+        });
+        
+        $('#Adddir').hover(function() {
+            
+            $('.Adddir').toggle();
+            
+        });
+
+       
+
+        $('#cais').hover(function() {
+
+            $('.cais').toggle();
+
+        });
+        
+          $('#qc').hover(function() {
+
+            $('.qc').toggle();
+
+        });
+
+    });
+
+    </script>
+
+    <apex:pageBlock >       
+
+        <table class="maintbl" WIDTH="100%" border="1" cellpadding="5" cellspacing="0">
+
+            <tr>
+
+                <th width="5%" align="center">Pre-Qual</th>                                       
+
+                <th width="28%" colspan="3">Bank Statement</th>
+
+                <th width="44%"  colspan="5">Documents</th>
+
+                <th width="20%" colspan="3">Personals</th>
+
+                <th width="5%">Property</th>  
+                <th width="5%">Quality Check</th>  
+
+            </tr>
+
+           
+
+            <tr>
+
+                <td width="5%">
+
+                    <a id="prequal">
+
+                        <apex:image styleClass="va" value="{!IF(NucleusBand == 'Green' && Incorporation == 'Green' && (Lead.Domain_Risk_Level__c == 'Low' || Lead.Domain_Risk_Level__c == 'Very Low') && (Lead.Refer_Status__c == 'Not a Match' || Lead.Refer_Status__c == NULL),URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" />
+
+                    </a>
+
+                </td>
+
+                <td width="12%">
+
+                    <b>Transactions </b>
+
+                      <a id="bank">
+
+                    <apex:image styleClass="va" value="{!IF(Bank == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" />
+
+                    </a>
+
+                    </td>
+
+                <td width="8%">
+
+                    <b>Bank </b> 
+
+                     <a id="dd">
+
+                    <apex:image styleClass="va" value="{!IF(CustFinDD == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px"/>
+
+                    </a>
+
+                </td>
+
+                <td width="10%">
+
+                    <b>Master FD </b> 
+
+                      <a id="mfd">
+
+                         <apex:image styleClass="va" value="{!IF(CustFinMaster == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" />
+
+                    </a>
+
+                </td>
+
+                <td width="8%">
+
+                    <b>Audit </b> 
+
+                      <a id="audit">
+
+                         <apex:image styleClass="va" value="{!IF(CompFinAudit == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" />
+
+                    </a>
+
+
+                </td>
+
+               <td width="8%">
+
+                    <b>Mgmt. </b> 
+
+                     <a id="mgmt">
+
+                         <apex:image styleClass="va" value="{!IF(CompFinManagement == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px"  rendered="{!IF(Lead.Management_Accounts__c == True && Lead.RLS_Category__c != 'Unsecured',true,false)}"/>
+
+                   </a>
+
+                         <apex:image styleClass="va" value="{!URLFOR($Resource.dashed)}" width="15px" height="15px"  rendered="{!IF(Lead.RLS_Category__c == 'Unsecured',true,false)}"/>
+
+                       
+
+                </td>
+
+                <td width="8%">
+
+                    <b>Draft </b>
+
+                     <a id="draft">
+
+                        <apex:image styleClass="va" value="{!IF(CompFinDraft == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" rendered="{!IF(Lead.Draft_Accounts__c == True,true,false)}"/>
+
+                    </a>
+
+                    <apex:image styleClass="va" value="{!URLFOR($Resource.dashed)}" width="15px" height="15px"  rendered="{!IF(Lead.RLS_Category__c == 'Unsecured',true,false)}"/>
+
+                </td>
+
+                <td width="10%">
+
+                    <b>Forecast </b>  
+                      <a id="forcast">
+
+                        <apex:image styleClass="va" value="{!IF(CompFinForecast == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" rendered="{!IF( Lead.RLS_Category__c =='Secured' || contains(Lead.RLS_Category__c,'ABL'),true,false)}"/>
+
+                    </a>
+
+                    <apex:image styleClass="va" value="{!URLFOR($Resource.dashed)}" width="15px" height="15px"  rendered="{!IF( Lead.RLS_Category__c =='Unsecured',true,false)}"/>
+
+                    
+
+                </td>
+                
+                  <td width="10%">
+
+                    <b>Collateral </b>  
+                      <a id="collateral">
+
+                        <apex:image styleClass="va" value="{!IF(Collateral == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" rendered="{!IF( contains(Lead.RLS_Category__c,'ABL'),true,false)}"/>
+
+                    </a>
+
+                    <apex:image styleClass="va" value="{!URLFOR($Resource.dashed)}" width="15px" height="15px"  rendered="{!IF( Lead.RLS_Category__c =='Unsecured',true,false)}"/>
+
+                    
+
+                </td>
+
+                <td width="8%">
+
+                    <b>Sig.Dir. </b>
+
+                      <a id="sigdir">
+
+                    <apex:image styleClass="va" value="{!IF(SignCheck == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" />
+
+                    </a>
+
+                </td>
+
+                <td width="8%">
+
+                    <b>Additional Director’s </b>
+
+                      <a id="Adddir">
+
+                    <apex:image styleClass="va" value="{!IF(AdddirCheck == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" />
+
+                    </a>
+
+                </td>
+                <td width="8%">
+
+                    <b>CAIS </b> 
+
+                      <a id="cais">
+
+                         <apex:image styleClass="va" value="{!IF(ExperianCheck == 'Green',URLFOR($Resource.Green),URLFOR($Resource.Yellow))}" width="15px" height="15px" />
+
+                    </a>
+
+                </td>
+
+                <td width="8%">
+
+                    <b></b>  <apex:image styleClass="va" value="{!URLFOR($Resource.dashed)}" width="15px" height="15px" />
+
+                </td>   
+                <td width="8%">
+
+                      <a id="qc">
+
+                         <apex:image styleClass="va" value="{!IF(Lead.Quality_Check_Status__c == NULL ||Lead.Quality_Check_Status__c == 'Submitted to Quality',URLFOR($Resource.Yellow),IF(Lead.Quality_Check_Status__c == 'Quality Check Complete',URLFOR($Resource.Green),URLFOR($Resource.Red)))}" width="15px" height="15px" />
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+       
+
+        
+
+        <div class="prequal hidden" align="left">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Company Score, Incorporation Date, Company Type, Fraud Check
+
+            </span>
+
+        </div>
+
+       
+
+        <div class="bank hidden" align="left">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Bank Transactions Created
+
+            </span>
+
+        </div>
+
+       
+
+        <div class="dd hidden" align="left">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Name of Account Holder, Account Number, Sort Code
+
+            </span>
+
+        </div>
+
+       
+
+        <div class="mfd hidden" align="center">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Customer Financials Start/End Date, Bounces, Trend Analysis Check, Overdraft and Average Balance Check
+
+            </span>
+
+        </div>
+
+       
+
+        <div class="audit hidden" align="center">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Valid Company Financial From Creditsafe/Full Accounts
+
+            </span>
+
+        </div>
+
+       
+
+        <div class="mgmt hidden" align="center">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Valid Company Financial Check from Management Accounts
+
+            </span>
+
+        </div>
+
+       
+
+        <div class="draft hidden" align="center">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Valid Company Financial Check from Draft Accounts
+
+            </span>
+
+        </div>
+
+        
+         <div class="forcast hidden" align="right">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Valid Company Financial Check from Forecast Accounts
+
+            </span>
+
+        </div>
+
+        <div class="collateral hidden" align="right">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Sig. Director and mandatory Contact Details
+
+            </span>
+
+        </div>
+
+       
+
+        <div class="sigdir hidden" align="right">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+           
+				This Covers: Sig. Director and Mandatory Contact Details including CAIS
+
+
+
+            </span>
+
+        </div>
+
+        <div class="Adddir hidden" align="right">
+            
+            <span style="background-color:#f1f1f1; padding:10px">
+                
+                This Includes: Additional Director added from Portal
+                
+            </span>
+            
+        </div>
+
+        <div class="cais hidden" align="right">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                This Covers: Valid Band Score Check for Sig. Director
+
+            </span>
+
+        </div>
+        
+         <div class="qc hidden" align="right">
+
+            <span style="background-color:#f1f1f1; padding:10px">
+
+                The Default is YELLOW, If Quality found an issue then its RED and If Quality Check Complete then GREEN
+
+            </span>
+
+        </div>
+
+    </apex:pageBlock>
+
+</apex:page>
+                                        
